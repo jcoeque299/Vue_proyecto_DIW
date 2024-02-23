@@ -10,9 +10,11 @@
         <button type="button" v-on:click="searchEvents">Buscar</button>
     </form>
     <ul v-if="events">
-        <li v-for="event in events" :key="event.id">
-        {{ event.name }}
-        </li>
+        <router-link v-for="event in events" :key="event.id" :to="{name: 'event', params: {id: event.id}}">
+            <li>
+                {{ event.name }}
+            </li>
+        </router-link>
     </ul>
     <p v-else>No hay resultados</p>
 </template>

@@ -15,8 +15,9 @@ const router = createRouter({
             component: () => import("../views/SearchView.vue")
         },
         {
-            path: "/event",
+            path: "/event/:id",
             name: "event",
+            props: route => ({...route.params, id: route.params.id}),
             component: () => import("../views/EventView.vue")
         },
         {

@@ -28,7 +28,18 @@ const router = createRouter({
         {
             path: "/login",
             name: "login",
-            component: () => import("../views/LoginView.vue")
+            component: () => import("../views/LoginView.vue"),
+            meta: {
+                requiresNoAuth: true,
+            }
+        },
+        {
+            path: "/register",
+            name: "register",
+            component: () => import("../views/RegisterView.vue"),
+            meta: {
+                requiresNoAuth: true,
+            }
         },
         {
             path: "/contact",
@@ -38,9 +49,20 @@ const router = createRouter({
         {
             path: "/profile",
             name: "profile",
-            component: () => import("../views/ProfileView.vue")
+            component: () => import("../views/ProfileView.vue"),
+            meta: {
+                requiresAuth: true,
+            }
         }
     ]
+})
+router.beforeEach((to, from) => {
+    if(to.meta.requiresAuth && !window.user) {
+        return {name: "login", query: {redirect: to.fullPath}}
+    }
+    if(to.meta.requiresNoAuth && window.user) {
+        return {name: "profile", query: {redirect: to.fullPath}}
+    }
 })
 
 export default router

@@ -6,5 +6,6 @@
     <RouterLink to = "/">Inicio</RouterLink>
     <RouterLink to = "/search">Buscar</RouterLink>
     <RouterLink to = "/contact">Soporte</RouterLink>
-    <RouterLink to = "/access">Acceder</RouterLink>
+    <RouterLink to = "/login">Acceder</RouterLink>
+    <RouterLink to = "/profile">Perfil</RouterLink>
 </template>

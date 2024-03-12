@@ -1,0 +1,28 @@
+<template>
+    <h1>Perfil</h1>
+    <section v-if="user">
+        <p>{{ user.name }}</p>
+        <p>{{ user.email }}</p>
+    </section>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                user: null
+            };
+        },
+        async created() {
+            const data = await fetch("http://localhost:8000/api/user", {
+                method: 'get',
+                headers: {
+                    'Authorization': 'Bearer ' + window.user
+                }
+            })
+            const response = await data.json()
+            console.log(response)
+            this.user = response
+        }
+    }
+</script>

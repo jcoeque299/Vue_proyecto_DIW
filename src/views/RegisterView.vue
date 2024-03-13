@@ -13,6 +13,8 @@
 </template>
 
 <script>
+    import {useCookies} from '@vueuse/integrations/useCookies'
+    const cookies = useCookies(["token"])
     export default {
         data() {
             return {
@@ -37,6 +39,7 @@
                 })
                 const response = await data.json()
                 cookies.set("token", response.token, 1)
+                this.$router.push("/profile")
             }
         }
     }

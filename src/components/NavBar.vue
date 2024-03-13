@@ -6,15 +6,43 @@
     <RouterLink to = "/">Inicio</RouterLink>
     <RouterLink to = "/search">Buscar</RouterLink>
     <RouterLink to = "/contact">Soporte</RouterLink>
-    <RouterLink v-if="!token" to = "/login">Iniciar sesion</RouterLink>
-    <RouterLink v-if="!token" to = "/register">Registrarse</RouterLink>
-    <RouterLink v-if="token" to = "/profile">Perfil</RouterLink>
+    <RouterLink v-if="!this.token" :key="this.token" to = "/login">Iniciar sesion</RouterLink>
+    <RouterLink v-if="!this.token" :key="this.token" to = "/register">Registrarse</RouterLink>
+    <RouterLink v-if="this.token" :key="this.token" to = "/profile">Perfil</RouterLink>
+    <button v-if="this.token" :key="this.token" @click="logout">Logout</button>
 </template>
 
 <script>
     import {useCookies} from '@vueuse/integrations/useCookies'
-    import { ref } from 'vue';
     const cookies = useCookies(["token"])
-    cookies.addChangeListener()
-    const token = cookies.get("token")
+    export default {
+        data() {
+            return {
+                token: cookies.get("token")
+            }
+
+        },
+        mounted() {
+            cookies.addChangeListener(() => {
+                this.token = cookies.get("token")
+                if (this.token === undefined) {
+                    this.$router.push("/")
+                }
+            })
+        },
+        methods: {
+            async logout() {
+                    const data = await fetch('http://localhost:8000/api/logout', {
+                    method: "post",
+                    headers: {
+                        'Authorization': 'Bearer ' + cookies.get("token")
+                    }
+                })
+                if (data) {
+                    cookies.remove("token")
+                }
+            }
+        }
+    }
+    
 </script>

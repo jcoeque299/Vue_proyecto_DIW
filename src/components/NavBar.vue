@@ -38,7 +38,7 @@
                         'Authorization': 'Bearer ' + cookies.get("token")
                     }
                 })
-                if (data) {
+                if (data.ok) {
                     cookies.remove("token")
                 }
             }

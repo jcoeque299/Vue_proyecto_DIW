@@ -23,7 +23,6 @@
         },
         methods: {
             async login() {
-                    console.log(this.formEmail, this.formPassword)
                     const data = await fetch('http://localhost:8000/api/login', {
                     method: "post",
                     headers: {
@@ -37,7 +36,7 @@
                 })
                 const response = await data.json()
                 window.user = response.token
-                cookies.set("token", response.token, 1)
+                cookies.set("token", response.token, {maxAge: 86400, sameSite: "strict"})
                 this.$router.push("/profile")
             }
         }

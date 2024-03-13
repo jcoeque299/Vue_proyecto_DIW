@@ -7,7 +7,9 @@
 </template>
 
 <script>
-    import Cookies from "js-cookie"
+    import {useCookies} from '@vueuse/integrations/useCookies'
+    const cookies = useCookies(["token"])
+
     export default {
         data() {
             return {
@@ -18,7 +20,7 @@
             const data = await fetch("http://localhost:8000/api/user", {
             method: 'get',
             headers: {
-                'Authorization': 'Bearer ' + Cookies.get("token")
+                'Authorization': 'Bearer ' + cookies.get("token")
             }})
             const response = await data.json()
             this.user = response

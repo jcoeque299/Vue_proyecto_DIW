@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Cookies from "js-cookie"
 import HomeView from "../views/HomeView.vue"
+import {useCookies} from '@vueuse/integrations/useCookies'
+const cookies = useCookies(["token"])
 
 const router = createRouter({
     history: createWebHistory(),
@@ -58,10 +59,10 @@ const router = createRouter({
     ]
 })
 router.beforeEach((to, from) => {
-    if(to.meta.requiresAuth && !Cookies.get("token")) {
+    if(to.meta.requiresAuth && !cookies.get("token")) {
         return {name: "login", query: {redirect: to.fullPath}}
     }
-    if(to.meta.requiresNoAuth && Cookies.get("token")) {
+    if(to.meta.requiresNoAuth && cookies.get("token")) {
         return {name: "profile", query: {redirect: to.fullPath}}
     }
 })

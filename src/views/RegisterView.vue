@@ -36,7 +36,7 @@
                     })
                 })
                 const response = await data.json()
-                window.user = response.token
+                cookies.set("token", response.token, 1)
             }
         }
     }

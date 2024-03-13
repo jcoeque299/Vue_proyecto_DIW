@@ -7,6 +7,7 @@
 </template>
 
 <script>
+    import Cookies from "js-cookie"
     export default {
         data() {
             return {
@@ -15,14 +16,13 @@
         },
         async created() {
             const data = await fetch("http://localhost:8000/api/user", {
-                method: 'get',
-                headers: {
-                    'Authorization': 'Bearer ' + window.user
-                }
-            })
+            method: 'get',
+            headers: {
+                'Authorization': 'Bearer ' + Cookies.get("token")
+            }})
             const response = await data.json()
-            console.log(response)
             this.user = response
+            this.$router.push("/profile")
         }
     }
 </script>

@@ -11,6 +11,7 @@
 </template>
 
 <script>
+    import Cookies from "js-cookie"
     export default {
         data() {
             return {
@@ -20,7 +21,6 @@
         },
         methods: {
             async login() {
-                
                     console.log(this.formEmail, this.formPassword)
                     const data = await fetch('http://localhost:8000/api/login', {
                     method: "post",
@@ -35,6 +35,8 @@
                 })
                 const response = await data.json()
                 window.user = response.token
+                Cookies.set("token", response.token, {expires: 1, SameSite: "strict"})
+                this.$router.push("/profile")
             }
         }
     }

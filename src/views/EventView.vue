@@ -19,7 +19,7 @@
         </form>
         </article>
         <article v-if="comments">
-            <p v-for="comment in comments">{{ comment.user.name }} {{ comment.commentText }}</p>
+            <p v-for="comment in comments">{{ comment.userId }} {{ comment.commentText }}</p>
         </article>
     </section>  
 </template>
@@ -45,18 +45,24 @@
             this.event = eventResponse
         },
         async mounted() {
+            //Si se elimina la cookie desde el navegador y se envia el comentario, todavia dejara enviarlo con las credenciales anteriores
             const userData = await fetch("http://localhost:8000/api/user", {
             method: 'get',
             headers: {
                 'Authorization': 'Bearer ' + cookies.get("token")
             }})
             const userResponse = await userData.json()
-            this.user = userResponse
-
+            if (userResponse.message) {
+                cookies.remove("token", {path:"/"})
+            }
+            else {
+                this.user = userResponse
+            }
             this.updateComments()
         },
         methods: {
             async sendComment() {
+                console.log(this.user.id, this.$props.id, this.commentBox)
                 const commentBoxData = await fetch('http://localhost:8000/api/comments', {
                     method: "post",
                     headers: {

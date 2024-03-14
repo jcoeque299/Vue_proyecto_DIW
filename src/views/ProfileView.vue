@@ -23,8 +23,12 @@
                 'Authorization': 'Bearer ' + cookies.get("token")
             }})
             const response = await data.json()
+            if (response.message) {
+                cookies.remove("token", {path:"/"})
+                this.$router.push("/")
+                return
+            }
             this.user = response
-            this.$router.push("/profile")
         }
     }
 </script>

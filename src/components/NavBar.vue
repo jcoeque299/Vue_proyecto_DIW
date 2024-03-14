@@ -25,9 +25,6 @@
         mounted() {
             cookies.addChangeListener(() => {
                 this.token = cookies.get("token")
-                if (this.token === undefined) {
-                    this.$router.push("/")
-                }
             })
         },
         methods: {
@@ -39,7 +36,8 @@
                     }
                 })
                 if (data.ok) {
-                    cookies.remove("token")
+                    cookies.remove("token", {path:"/"})
+                    this.$router.push("/")
                 }
             }
         }

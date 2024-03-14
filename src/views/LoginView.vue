@@ -36,7 +36,7 @@
                 })
                 const response = await data.json()
                 window.user = response.token
-                cookies.set("token", response.token, {maxAge: 86400, sameSite: "strict"})
+                cookies.set("token", response.token, {maxAge: 86400, sameSite: "strict", path:"/"})
                 this.$router.push("/profile")
             }
         }

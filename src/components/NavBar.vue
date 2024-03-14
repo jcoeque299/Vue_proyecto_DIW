@@ -6,10 +6,10 @@
     <RouterLink to = "/">Inicio</RouterLink>
     <RouterLink to = "/search">Buscar</RouterLink>
     <RouterLink to = "/contact">Soporte</RouterLink>
-    <RouterLink v-if="!this.token" :key="this.token" to = "/login">Iniciar sesion</RouterLink>
-    <RouterLink v-if="!this.token" :key="this.token" to = "/register">Registrarse</RouterLink>
-    <RouterLink v-if="this.token" :key="this.token" to = "/profile">Perfil</RouterLink>
-    <button v-if="this.token" :key="this.token" @click="logout">Logout</button>
+    <RouterLink v-if="!token" :key="token" to = "/login">Iniciar sesion</RouterLink>
+    <RouterLink v-if="!token" :key="token" to = "/register">Registrarse</RouterLink>
+    <RouterLink v-if="token" :key="token" to = "/profile">Perfil</RouterLink>
+    <button v-if="token" :key="token" @click="logout">Logout</button>
 </template>
 
 <script>

@@ -9,6 +9,7 @@
     <RouterLink v-if="!token" :key="token" to = "/login">Iniciar sesion</RouterLink>
     <RouterLink v-if="!token" :key="token" to = "/register">Registrarse</RouterLink>
     <RouterLink v-if="token" :key="token" to = "/profile">Perfil</RouterLink>
+    <RouterLink v-if="token" :key="token" to = "/watched">Guardados</RouterLink>
     <button v-if="token" :key="token" @click="logout">Logout</button>
 </template>
 

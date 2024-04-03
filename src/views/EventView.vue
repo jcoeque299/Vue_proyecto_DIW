@@ -11,6 +11,7 @@
             <p v-if="event.info">{{ event.info }}</p>
             <button v-if="event.seatmap">Ver mapa del recinto</button>
             <a v-if="event.url" :href="event.url" target="_blank">Comprar entradas</a>
+            <button @click="saveEvent">Guardar evento</button>
         </article>
         <article v-if="user && !user.message">
         <form @submit.prevent="sendComment">
@@ -19,7 +20,7 @@
         </form>
         </article>
         <article v-if="comments">
-            <p v-for="comment in comments">{{ comment.userId }} {{ comment.commentText }}</p>
+            <p v-for="comment in comments">{{ comment.name }} {{ comment.commentText }}</p>
         </article>
     </section>  
 </template>
@@ -82,6 +83,19 @@
                 const commentData = await fetch(`http://localhost:8000/api/comments/${this.$props.id}`)
                 const commentResponse = await commentData.json()
                 this.comments = commentResponse
+            },
+            async saveEvent() {
+                const savedEventData = await fetch('http://localhost:8000/api/saved', {
+                    method: "post",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userId: this.user.id,
+                        eventId: this.$props.id,
+                    })
+                })
             }
         }
     }

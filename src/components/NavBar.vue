@@ -10,6 +10,7 @@
     <RouterLink v-if="!token" :key="token" to = "/register">Registrarse</RouterLink>
     <RouterLink v-if="token" :key="token" to = "/profile">Perfil</RouterLink>
     <RouterLink v-if="token" :key="token" to = "/watched">Guardados</RouterLink>
+    <RouterLink v-if="adminView === 'admin'" :key="adminView" to = "/admin">Administracion</RouterLink>
     <button v-if="token" :key="token" @click="logout">Logout</button>
 </template>
 
@@ -19,13 +20,16 @@
     export default {
         data() {
             return {
-                token: cookies.get("token")
+                token: cookies.get("token"),
+                adminView: null
             }
 
         },
         mounted() {
+            this.checkRole()
             cookies.addChangeListener(() => {
                 this.token = cookies.get("token")
+                this.checkRole()
             })
         },
         methods: {
@@ -40,6 +44,19 @@
                     cookies.remove("token", {path:"/"})
                     this.$router.push("/")
                 }
+            },
+            async checkRole() {
+                if (this.token) {
+                    const data = await fetch('http://localhost:8000/api/user/role', {
+                        headers: {
+                            'Authorization': 'Bearer ' + cookies.get("token")
+                        },
+                    })
+                    const response = await data.json()
+                    this.adminView = response.role
+                    return
+                }
+                this.adminView = null
             }
         }
     }

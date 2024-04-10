@@ -13,7 +13,7 @@
             <a v-if="event.url" :href="event.url" target="_blank">Comprar entradas</a>
             <button @click="saveEvent">Guardar evento</button>
         </article>
-        <article v-if="user && !user.message">
+        <article v-if="user" :key = "user">
         <form @submit.prevent="sendComment">
             <textarea v-model="commentBox" id="commentBox"></textarea>
             <button @submit="sendComment">Enviar comentario</button>
@@ -23,7 +23,6 @@
             <p v-for="comment in comments">{{ comment.name }} {{ comment.commentText }}</p>
         </article>
     </section>
-    <p v-else-if="event === false">Información de evento no disponible</p>
 </template>
 
 <script>
@@ -35,7 +34,8 @@
                 event: null,
                 comments: null,
                 user: null,
-                commentBox: ""
+                commentBox: "",
+                token: cookies.get("token")
             }
         },
         props: {
@@ -45,22 +45,13 @@
             const eventData = await fetch(`https://app.ticketmaster.com/discovery/v2/events/${this.id}.json?apikey=S1sDAS05dZI5JmtvdarQaZN5tFxkOUpr`)
             const eventResponse = await eventData.json()
             this.event = eventResponse
-            console.log(this.event)
+            cookies.addChangeListener(() => {
+                this.token = cookies.get("token")
+                this.checkUser()
+            })
         },
         async mounted() {
-            //Si se elimina la cookie desde el navegador y se envia el comentario, todavia dejara enviarlo con las credenciales anteriores
-            const userData = await fetch("http://localhost:8000/api/user", {
-            method: 'get',
-            headers: {
-                'Authorization': 'Bearer ' + cookies.get("token")
-            }})
-            const userResponse = await userData.json()
-            if (userResponse.message) {
-                cookies.remove("token", {path:"/"})
-            }
-            else {
-                this.user = userResponse
-            }
+            this.checkUser()
             this.updateComments()
         },
         methods: {
@@ -98,6 +89,25 @@
                         eventId: this.$props.id,
                     })
                 })
+            },
+            async checkUser() {
+                if (this.token) {
+                    const userData = await fetch("http://localhost:8000/api/user", {
+                    method: 'get',
+                    headers: {
+                        'Authorization': 'Bearer ' + cookies.get("token")
+                    }})
+                    const userResponse = await userData.json()
+                    if (userResponse.message) {
+                        cookies.remove("token", {path:"/"})
+                    }
+                    else {
+                        this.user = userResponse
+                    }
+                }
+                else {
+                    this.user = null
+                }
             }
         }
     }

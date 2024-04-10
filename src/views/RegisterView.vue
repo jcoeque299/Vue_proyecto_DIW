@@ -7,6 +7,10 @@
             <input type="text" v-model="formEmail" id="formEmail">
             <label for="formPassword">Contraseña</label>
             <input type="password" v-model="formPassword" id="formPassword">
+            <label for="formLocation">Ubicacion</label>
+            <select v-model="formLocation" id="formLocation">
+                <option v-for="country in countryData" v-bind:value="country.code">{{ country.name }}</option>
+            </select>
             <button @submit="register">Registrarse</button>
         </form>
     </section>
@@ -14,13 +18,16 @@
 
 <script>
     import {useCookies} from '@vueuse/integrations/useCookies'
+    import countryData from "/src/data.json"
     const cookies = useCookies(["token"])
     export default {
         data() {
             return {
                 formName: "",
                 formEmail: "",
-                formPassword: ""
+                formPassword: "",
+                formLocation: "",
+                countryData: countryData
             }
         },
         methods: {
@@ -35,6 +42,7 @@
                         name: this.formName,
                         email: this.formEmail,
                         password: this.formPassword,
+                        location: this.formLocation
                     })
                 })
                 const response = await data.json()

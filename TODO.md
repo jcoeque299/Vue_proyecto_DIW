@@ -1,8 +1,7 @@
 # TODO
 
-+ Hay eventos que devuelven undefined en data embedded. Buscar la causa y corregirla
-+ Panel de administracion de tickets de soporte
-+ Que el guardado de eventos no permita duplicados
-+ Eleccion de ubicacion para buscar eventos en la ubicacion seleccionada en la pagina home
++ Pulir el panel de administracion
++ Pulir el guardado de eventos
++ Boton de favoritos en eventos guardados cambia segun si esta guardado o no (traumitas de react)
 
 + CSS

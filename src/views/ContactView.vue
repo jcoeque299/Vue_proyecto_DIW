@@ -32,6 +32,7 @@
                     })
                 })
                 const response = await data.json()
+                this.$router.push("/")
             }
         }
     }

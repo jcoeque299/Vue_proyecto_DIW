@@ -3,17 +3,20 @@
     <section v-if="user">
         <p>{{ user.name }}</p>
         <p>{{ user.email }}</p>
+        <p>{{ user.location }}</p>
     </section>
 </template>
 
 <script>
+    import countryData from "/src/data.json"
     import {useCookies} from '@vueuse/integrations/useCookies'
     const cookies = useCookies(["token"])
 
     export default {
         data() {
             return {
-                user: null
+                user: null,
+                countryData: countryData
             };
         },
         async created() {
@@ -29,6 +32,7 @@
                 return
             }
             this.user = response
+            this.user.location = countryData.find(country => country.code === this.user.location).name
         }
     }
 </script>

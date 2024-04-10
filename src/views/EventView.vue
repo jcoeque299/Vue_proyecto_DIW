@@ -7,7 +7,7 @@
             <img v-if="event.images" :src="event.images[0].url">
             <img v-if="event.seatmap" :src="event.seatmap.staticUrl">
             <p v-if="!event.dates.start.dateTBD && !event.dates.start.dateTBA">Fecha del evento: {{ event.dates.start.localDate }}</p>
-            <p v-if="event._embedded.venues">En: {{ event._embedded.venues[0].country.name }}, {{ event._embedded.venues[0].city.name }}</p>
+            <p v-if=" event._embedded && event._embedded.venues">En: {{ event._embedded.venues[0].country.name }}, {{ event._embedded.venues[0].city.name }}</p>
             <p v-if="event.info">{{ event.info }}</p>
             <button v-if="event.seatmap">Ver mapa del recinto</button>
             <a v-if="event.url" :href="event.url" target="_blank">Comprar entradas</a>
@@ -22,7 +22,8 @@
         <article v-if="comments">
             <p v-for="comment in comments">{{ comment.name }} {{ comment.commentText }}</p>
         </article>
-    </section>  
+    </section>
+    <p v-else-if="event === false">Información de evento no disponible</p>
 </template>
 
 <script>
@@ -44,6 +45,7 @@
             const eventData = await fetch(`https://app.ticketmaster.com/discovery/v2/events/${this.id}.json?apikey=S1sDAS05dZI5JmtvdarQaZN5tFxkOUpr`)
             const eventResponse = await eventData.json()
             this.event = eventResponse
+            console.log(this.event)
         },
         async mounted() {
             //Si se elimina la cookie desde el navegador y se envia el comentario, todavia dejara enviarlo con las credenciales anteriores

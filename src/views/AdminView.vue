@@ -4,7 +4,7 @@
             <p>{{ ticket.contactEmail }}</p>
             <p>{{ ticket.text }}</p>
         </article>
-        <article v-else>
+        <article v-else-if="tickets === false">
             <p>Acceso no autorizado</p>
         </article>
     </section>
@@ -26,9 +26,11 @@
             headers: {
                 'Authorization': 'Bearer ' + cookies.get("token")
             }})
-            console.log(data)
             if(data.status === 200) {
                 this.tickets = await data.json()
+            }
+            else {
+                this.tickets = false
             }
         }
     }

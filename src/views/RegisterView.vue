@@ -26,7 +26,7 @@
                 formName: "",
                 formEmail: "",
                 formPassword: "",
-                formLocation: "",
+                formLocation: countryData[0].code,
                 countryData: countryData
             }
         },
@@ -46,8 +46,11 @@
                     })
                 })
                 const response = await data.json()
-                cookies.set("token", response.token, {maxAge: 86400, sameSite: "strict", path:"/"})
-                this.$router.push("/profile")
+                if (response.statusCode === 200) {
+                    cookies.set("token", response.token, {maxAge: 86400, sameSite: "strict", path:"/"})
+                    this.$router.push("/profile")
+                }
+                
             }
         }
     }

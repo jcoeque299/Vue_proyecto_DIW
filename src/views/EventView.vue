@@ -90,6 +90,8 @@
                     body: JSON.stringify({
                         userId: this.user.id,
                         eventId: this.$props.id,
+                        eventName: this.event.name,
+                        eventImageSource: this.event.images[0].url
                     })
                 })
                 this.checkIfSaved()

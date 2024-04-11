@@ -2,7 +2,8 @@
     <p>Watched Events</p>
     <article v-for="savedEvent in saved" :key="savedEvent.eventId">
         <router-link :to="{name: 'event', params: {id: savedEvent.eventId}}">
-            <li>{{ savedEvent.eventId }}</li>
+            <img :src="savedEvent.eventImageSource">
+            <li>{{ savedEvent.eventName }}</li>
         </router-link>
         <button @click="deleteSaved(savedEvent.id)">Borrar</button>
     </article>

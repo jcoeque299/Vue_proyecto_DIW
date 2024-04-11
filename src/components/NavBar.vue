@@ -34,11 +34,11 @@
         },
         methods: {
             async logout() {
-                    const data = await fetch('http://localhost:8000/api/logout', {
-                    method: "post",
-                    headers: {
-                        'Authorization': 'Bearer ' + cookies.get("token")
-                    }
+                const data = await fetch('http://localhost:8000/api/logout', {
+                method: "post",
+                headers: {
+                    'Authorization': 'Bearer ' + cookies.get("token")
+                }
                 })
                 if (data.ok) {
                     cookies.remove("token", {path:"/"})

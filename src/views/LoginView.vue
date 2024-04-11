@@ -35,9 +35,10 @@
                     })
                 })
                 const response = await data.json()
-                window.user = response.token
-                cookies.set("token", response.token, {maxAge: 86400, sameSite: "strict", path:"/"})
-                this.$router.push("/profile")
+                if (response.statusCode === 200) {
+                    cookies.set("token", response.token, {maxAge: 86400, sameSite: "strict", path:"/"})
+                    this.$router.push("/profile")
+                }
             }
         }
     }

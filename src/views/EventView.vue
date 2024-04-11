@@ -11,7 +11,8 @@
             <p v-if="event.info">{{ event.info }}</p>
             <button v-if="event.seatmap">Ver mapa del recinto</button>
             <a v-if="event.url" :href="event.url" target="_blank">Comprar entradas</a>
-            <button @click="saveEvent">Guardar evento</button>
+            <button @click="saveEvent" v-if="!saved">Guardar evento</button>
+            <button @click="removeEvent" v-if="saved">Borrar evento</button>
         </article>
         <article v-if="user" :key = "user">
         <form @submit.prevent="sendComment">
@@ -34,6 +35,7 @@
                 event: null,
                 comments: null,
                 user: null,
+                saved: null,
                 commentBox: "",
                 token: cookies.get("token")
             }
@@ -51,8 +53,9 @@
             })
         },
         async mounted() {
-            this.checkUser()
-            this.updateComments()
+            await this.checkUser()
+            await this.updateComments()
+            await this.checkIfSaved()
         },
         methods: {
             async sendComment() {
@@ -89,6 +92,15 @@
                         eventId: this.$props.id,
                     })
                 })
+                this.checkIfSaved()
+            },
+            async removeEvent() {
+                const deleteSaved = await fetch(`http://localhost:8000/api/saved/${this.saved.id}`, {
+                method: 'delete',
+                headers: {
+                    'Authorization': 'Bearer ' + cookies.get("token")
+                }})
+                this.saved = null
             },
             async checkUser() {
                 if (this.token) {
@@ -107,6 +119,21 @@
                 }
                 else {
                     this.user = null
+                }
+            },
+            async checkIfSaved() {
+                if (this.user) {
+                    const savedData = await fetch(`http://localhost:8000/api/saved/${this.user.id}`, {
+                    method: 'get',
+                    })
+                    const savedResponse = await savedData.json()
+                    const savedEvent = savedResponse.find(savedEvent => savedEvent.eventId === this.$props.id)
+                    if (savedEvent) {
+                        this.saved = savedEvent
+                    }
+                    else {
+                        this.saved = null
+                    }
                 }
             }
         }

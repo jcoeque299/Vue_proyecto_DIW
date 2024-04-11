@@ -1,8 +1,14 @@
 <template>
-    <article v-for="ticket in tickets">
-        <p>{{ ticket.contactEmail }}</p>
-        <p>{{ ticket.text }}</p>
-    </article>
+    <section >
+        <article v-if="tickets" v-for="ticket in tickets">
+            <p>{{ ticket.contactEmail }}</p>
+            <p>{{ ticket.text }}</p>
+        </article>
+        <article v-else>
+            <p>Acceso no autorizado</p>
+        </article>
+    </section>
+    
 </template>
 
 <script>
@@ -20,11 +26,10 @@
             headers: {
                 'Authorization': 'Bearer ' + cookies.get("token")
             }})
-            if(data.status === 403) {
-                this.tickets = "Acceso no autorizado"
-                return
+            console.log(data)
+            if(data.status === 200) {
+                this.tickets = await data.json()
             }
-            this.tickets = await data.json()
         }
     }
 </script>

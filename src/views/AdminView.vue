@@ -1,5 +1,8 @@
 <template>
-    <p>{{ this.tickets }}</p>
+    <article v-for="ticket in tickets">
+        <p>{{ ticket.contactEmail }}</p>
+        <p>{{ ticket.text }}</p>
+    </article>
 </template>
 
 <script>

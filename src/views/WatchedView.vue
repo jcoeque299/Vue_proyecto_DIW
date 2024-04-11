@@ -1,6 +1,11 @@
 <template>
     <p>Watched Events</p>
-    <p v-if="saved">{{ saved }}</p>
+    <article v-for="savedEvent in saved" :key="savedEvent.eventId">
+        <router-link :to="{name: 'event', params: {id: savedEvent.eventId}}">
+            <li>{{ savedEvent.eventId }}</li>
+        </router-link>
+        <button @click="deleteSaved(savedEvent.id)">Borrar</button>
+    </article>
 </template>
 
 <script>
@@ -27,11 +32,24 @@
             }
             this.user = userResponse
 
-            const savedData = await fetch(`http://localhost:8000/api/saved/${this.user.id}`, {
-            method: 'get',
-            })
-            const savedResponse = await savedData.json()
-            this.saved = savedResponse
+            this.updateSaved()
+        },
+        methods: {
+            async deleteSaved(eventId) {
+                const deleteSaved = await fetch(`http://localhost:8000/api/saved/${eventId}`, {
+                method: 'delete',
+                headers: {
+                    'Authorization': 'Bearer ' + cookies.get("token")
+                }})
+                this.updateSaved()
+            },
+            async updateSaved() {
+                const savedData = await fetch(`http://localhost:8000/api/saved/${this.user.id}`, {
+                method: 'get',
+                })
+                const savedResponse = await savedData.json()
+                this.saved = savedResponse
+            }
         }
     }
 </script>

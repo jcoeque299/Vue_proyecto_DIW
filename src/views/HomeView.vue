@@ -1,14 +1,18 @@
 <template>
-    <section v-if = "eventRecomendations && user">
-        <ul>
-            <router-link v-for="event in eventRecomendations" :key="event.id" :to="{name: 'event', params: {id: event.id}}">
-                <li>
-                    {{ event.name }}
-                </li>
-            </router-link>
-        </ul>
+    <section v-if = "eventRecomendations && user" class="event__card__container">
+        <h2>Eventos en {{ this.user.locationName }}</h2>
+        <article class="event__card" v-for="event in eventRecomendations" :key="event.id">
+            <router-link  :to="{name: 'event', params: {id: event.id}}">
+                <img v-if="event.images" :src="event.images[0].url">
+                <div class="event__card__content">
+                    <h3>
+                        {{ event.name }}
+                    </h3>     
+                </div>
+            </router-link> 
+        </article>
+        
     </section>
-    
 </template>
 
 <script>
@@ -42,6 +46,7 @@
                 const results = await data.json()
                 if (results._embedded) {
                     this.eventRecomendations = results._embedded.events
+                    console.log(this.eventRecomendations)
                     return
                 }
                 this.eventRecomendations = null

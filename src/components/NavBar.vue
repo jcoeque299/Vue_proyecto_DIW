@@ -3,15 +3,23 @@
 </script>
 
 <template>
-    <RouterLink to = "/">Inicio</RouterLink>
-    <RouterLink to = "/search">Buscar</RouterLink>
-    <RouterLink to = "/contact">Soporte</RouterLink>
-    <RouterLink v-if="!token" :key="token" to = "/login">Iniciar sesion</RouterLink>
-    <RouterLink v-if="!token" :key="token" to = "/register">Registrarse</RouterLink>
-    <RouterLink v-if="token" :key="token" to = "/profile">Perfil</RouterLink>
-    <RouterLink v-if="token" :key="token" to = "/watched">Guardados</RouterLink>
-    <RouterLink v-if="adminView === 'admin'" :key="adminView" to = "/admin">Administracion</RouterLink>
-    <button v-if="token" :key="token" @click="logout">Logout</button>
+    <ul class="navbar">
+        <li class="logo"><img src=""></li>
+        <input type="checkbox" id="check">
+        <span class="menu">
+            <li><RouterLink to = "/">Inicio</RouterLink></li>
+            <li><RouterLink to = "/search">Buscar</RouterLink></li>
+            <li><RouterLink to = "/contact">Soporte</RouterLink></li>
+            <li v-if="!token" :key="token"><RouterLink to = "/login">Iniciar sesion</RouterLink></li>
+            <li v-if="!token" :key="token"><RouterLink to = "/register">Registrarse</RouterLink></li>
+            <li v-if="token" :key="token"><RouterLink to = "/profile">Perfil</RouterLink></li>
+            <li v-if="token" :key="token"><RouterLink to = "/watched">Guardados</RouterLink></li>
+            <li v-if="adminView === 'admin'" :key="adminView"><RouterLink to = "/admin">Administracion</RouterLink></li>
+            <li v-if="token" :key="token"><a @click="logout">Logout</a></li>
+            <label for="check" class="menu--close"><i class="fas fa-times"></i></label>
+        </span>
+        <label for="check" class="menu--open"><i class="fas fa-bars"></i></label>
+    </ul>
 </template>
 
 <script>

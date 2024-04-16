@@ -22,13 +22,20 @@
         <input type="date" id="eventDate" name="eventDate" v-model="eventDate">
         <button type="button" v-on:click="searchEvents">Buscar</button>
     </form>
-    <ul v-if="events">
-        <router-link v-for="event in events" :key="event.id" :to="{name: 'event', params: {id: event.id}}">
-            <li>
-                {{ event.name }}
-            </li>
-        </router-link>
-    </ul>
+    <section v-if="events" class="event__card__container">
+        <article class="event__card" v-for="event in events" :key="event.id">
+            <router-link  :to="{name: 'event', params: {id: event.id}}">
+                <img v-if="event.images" :src="event.images[0].url">
+                <div class="event__card__content">
+                    <h3>
+                        {{ event.name }}
+                    </h3>
+                    <p v-if="!event.dates.start.dateTBD && !event.dates.start.dateTBA">{{ event.dates.start.localDate }}</p>
+                    <p v-if=" event._embedded && event._embedded.venues">{{ event._embedded.venues[0].country.name }}, {{ event._embedded.venues[0].city.name }}</p>
+                </div>
+            </router-link> 
+        </article>
+    </section>
     <p v-else>No hay resultados</p>
 </template>
 

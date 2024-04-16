@@ -9,6 +9,8 @@
             <p v-if="!event.dates.start.dateTBD && !event.dates.start.dateTBA">Fecha del evento: {{ event.dates.start.localDate }}</p>
             <p v-if=" event._embedded && event._embedded.venues">En: {{ event._embedded.venues[0].country.name }}, {{ event._embedded.venues[0].city.name }}</p>
             <p v-if="event.info">{{ event.info }}</p>
+            <p v-if="event.pleaseNote">{{ event.pleaseNote }}</p>
+            <p v-if="event.ticketLimit">{{ event.ticketLimit.info }}</p>
             <button v-if="event.seatmap">Ver mapa del recinto</button>
             <a v-if="event.url" :href="event.url" target="_blank">Comprar entradas</a>
             <button @click="saveEvent" v-if="!saved">Guardar evento</button>

@@ -1,12 +1,19 @@
 <template>
-    <p>Watched Events</p>
-    <article v-for="savedEvent in saved" :key="savedEvent.eventId">
-        <router-link :to="{name: 'event', params: {id: savedEvent.eventId}}">
-            <img :src="savedEvent.eventImageSource">
-            <li>{{ savedEvent.eventName }}</li>
-        </router-link>
-        <button @click="deleteSaved(savedEvent.id)">Borrar</button>
-    </article>
+    <section v-if="saved && saved.length" class="event__card__container">
+        <h2>Eventos guardados</h2>
+        <article v-for="savedEvent in saved" :key="savedEvent.eventId" class="event__card">
+            <router-link :to="{name: 'event', params: {id: savedEvent.eventId}}">
+                <img v-if="savedEvent.eventImageSource" :src="savedEvent.eventImageSource">
+                <div class="event__card__content">
+                    <h3>
+                        {{ savedEvent.eventName }}
+                    </h3>
+                </div>
+            </router-link>
+            <button @click="deleteSaved(savedEvent.id)" class="event__card__button">Borrar</button>
+        </article>
+    </section>
+    <section v-else-if="saved === false"><h2>Sin eventos guardados</h2></section>
 </template>
 
 <script>
@@ -49,7 +56,11 @@
                 method: 'get',
                 })
                 const savedResponse = await savedData.json()
-                this.saved = savedResponse
+                if (savedResponse.length) {
+                    this.saved = savedResponse
+                    return
+                }
+                this.saved = false
             }
         }
     }

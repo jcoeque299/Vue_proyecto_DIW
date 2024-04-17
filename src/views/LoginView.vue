@@ -1,11 +1,25 @@
 <template>
-    <section>
-        <form @submit.prevent="login">
-            <label for="formEmail">Email</label>
-            <input type="text" v-model="formEmail" id="formEmail">
-            <label for="formPassword">Contraseña</label>
-            <input type="password" v-model="formPassword" id="formPassword">
-            <button @submit="login">Login</button>
+    <section class="form__container">
+        <form @submit.prevent="login" class="form">
+            <fieldset class="form__row">
+                <div class="form__column__small">
+                    <label for="formEmail" class="form__label">Email</label>
+                </div>
+                <div class="form__column__big">
+                    <input type="text" v-model="formEmail" id="formEmail" class="form__input">
+                </div>
+            </fieldset>
+            <fieldset class="form__row">
+                <div class="form__column__small">
+                    <label for="formPassword" class="form__label">Contraseña</label>
+                </div>
+                <div class="form__column__big">
+                    <input type="password" v-model="formPassword" id="formPassword" class="form__input">
+                </div>
+            </fieldset>
+            <fieldset class="form__row">
+                <button @submit="login" class="form__button">Login</button>
+            </fieldset>
         </form>
     </section>
 </template>

@@ -1,17 +1,43 @@
 <template>
-    <section>
-        <form @submit.prevent="register">
-            <label for="formName">Nickname</label>
-            <input type="text" v-model="formName" id="formName">
-            <label for="formEmail">Email</label>
-            <input type="text" v-model="formEmail" id="formEmail">
-            <label for="formPassword">Contraseña</label>
-            <input type="password" v-model="formPassword" id="formPassword">
-            <label for="formLocation">Ubicacion</label>
-            <select v-model="formLocation" id="formLocation">
-                <option v-for="country in countryData" v-bind:value="country.code">{{ country.name }}</option>
-            </select>
-            <button @submit="register">Registrarse</button>
+    <section class="form__container">
+        <form @submit.prevent="register" class="form">
+            <fieldset class="form__row">
+                <div class="form__column__small">
+                    <label for="formName" class="form__label">Nickname</label>
+                </div>
+                <div class="form__column__big">
+                    <input type="text" v-model="formName" id="formName" class="form__input">
+                </div>
+            </fieldset>
+            <fieldset class="form__row">
+                <div class="form__column__small">
+                    <label for="formEmail" class="form__label">Email</label>
+                </div>
+                <div class="form__column__big">
+                    <input type="text" v-model="formEmail" id="formEmail" class="form__input">
+                </div>
+            </fieldset>
+            <fieldset class="form__row">
+                <div class="form__column__small">
+                    <label for="formPassword" class="form__label">Contraseña</label>
+                </div>
+                <div class="form__column__big">
+                    <input type="password" v-model="formPassword" id="formPassword" class="form__input">
+                </div>
+            </fieldset>
+            <fieldset class="form__row">
+                <div class="form__column__small">
+                    <label for="formLocation" class="form__label">Ubicacion</label>
+                </div>
+                <div class="form__column__big">
+                    <select v-model="formLocation" id="formLocation" class="form__input">
+                        <option v-for="country in countryData" v-bind:value="country.code">{{ country.name }}</option>
+                    </select>
+                </div>
+            </fieldset>
+            <fieldset class="form__row">
+                <button @submit="register" class="form__button">Registrarse</button>
+            </fieldset>
         </form>
     </section>
 </template>

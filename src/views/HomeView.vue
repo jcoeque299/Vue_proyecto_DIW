@@ -7,7 +7,9 @@
                 <div class="event__card__content">
                     <h3>
                         {{ event.name }}
-                    </h3>     
+                    </h3>
+                    <p v-if="!event.dates.start.dateTBD && !event.dates.start.dateTBA">{{ event.dates.start.localDate }}</p>
+                    <p v-if=" event._embedded && event._embedded.venues">{{ event._embedded.venues[0].city.name }}</p>  
                 </div>
             </router-link> 
         </article>
@@ -42,7 +44,7 @@
             this.user = response
             this.user.locationName = countryData.find(country => country.code === this.user.location).name
             if (this.user) {
-                const data = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=${this.user.location}&apikey=S1sDAS05dZI5JmtvdarQaZN5tFxkOUpr&size=3`)
+                const data = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=${this.user.location}&apikey=S1sDAS05dZI5JmtvdarQaZN5tFxkOUpr&size=5`)
                 const results = await data.json()
                 if (results._embedded) {
                     this.eventRecomendations = results._embedded.events

@@ -4,10 +4,23 @@
     padding: 0;
 }
 body {
-    font-family: "Poppins", sans-serif;
+    font-family: "Open Sans";
     --color1: #FFF;
     --color2: #181818;
 }
+
+section {
+    margin-top: 100px;
+}
+
+section h2 {
+    flex-basis: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/*Navbar*/
+
 .navbar {
     width: 100%;
     display: flex;
@@ -78,6 +91,116 @@ body {
     display: none;
 }
 
+
+
+/*Cards*/
+
+.event__card__container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.event__card {
+    width: 325px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+    margin: 20px;
+    transition: all 0.3s;
+}
+
+.event__card:hover {
+    transform: scale(1.1);
+}
+
+.event__card img {
+    width: 100%;
+    height: auto;
+}
+
+.event__card__content {
+    padding: 16px;
+}
+
+.event__card__button {
+    background-color: #181818;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 20px;
+    cursor: pointer;
+    float: right;
+    width: 100%;
+}
+
+.event__card__button:hover {
+    background-color: #383838;
+}
+
+/*Forms*/
+
+.form__container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    width: 50%;
+    margin: 100px auto;
+}
+
+.form__row {
+    border: none;
+}
+
+.form__row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.form__column__small {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.form__column__big {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+.form__input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.form__label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+.form__button {
+    background-color: #181818;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 20px;
+    cursor: pointer;
+    float: right;
+}
+
+.form__button:hover {
+    background-color: #383838;
+}
+
+/*Responsive*/
+
 @media(max-width: 610px) {
     .menu {
         flex-direction: column;
@@ -104,45 +227,7 @@ body {
     #check:checked ~ .menu {
         right: 0;
     }
-}
-
-/*Cards*/
-
-.event__card__container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 100px;
-}
-
-.event__card__container h2 {
-    flex-basis: 100%;
-    text-align: center;
-}
-
-.event__card {
-    width: 325px;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
-    margin: 20px;
-    transition: all 0.3s;
-}
-
-.event__card:hover {
-    transform: scale(1.1);
-}
-
-.event__card img {
-    width: 100%;
-    height: auto;
-}
-
-.event__card__content {
-    padding: 16px;
-}
-
-.event__card__content h3 {
-    font-size: 20px;
-    margin-bottom: 8px;
+    .form__column__small, .form__column__big, .form__button {
+        width: 100%;
+    }
 }

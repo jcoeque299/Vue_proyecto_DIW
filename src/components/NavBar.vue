@@ -4,11 +4,17 @@
 
 <template>
     <ul class="navbar">
-        <li class="logo"><img src=""></li>
+        <span class="menu">
+            <li class="logo"><img src=""></li>
+            <div class="menu__search">
+                <input type="text" class="menu__search__input" placeholder="¿Qué quieres ver?" v-model="eventQuery">
+                <router-link class="menu__search__button" :to="{name: 'results', params: {query: eventQuery, type: '', country: '', date: `${new Date().getFullYear()}-01-01`,}}">Buscar</router-link>
+            </div>
+        </span>
         <input type="checkbox" id="check">
         <span class="menu">
             <li><RouterLink to = "/">Inicio</RouterLink></li>
-            <li><RouterLink to = "/search">Buscar</RouterLink></li>
+            <li><RouterLink to = "/search">Búsqueda avanzada</RouterLink></li>
             <li><RouterLink to = "/contact">Soporte</RouterLink></li>
             <li v-if="!token" :key="token"><RouterLink to = "/login">Iniciar sesion</RouterLink></li>
             <li v-if="!token" :key="token"><RouterLink to = "/register">Registrarse</RouterLink></li>
@@ -29,7 +35,8 @@
         data() {
             return {
                 token: cookies.get("token"),
-                adminView: null
+                adminView: null,
+                eventQuery: null
             }
 
         },

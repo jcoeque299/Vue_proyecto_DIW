@@ -1,11 +1,26 @@
 <template>
-    <section>
+    <section class="form__container">
+        <h2>Enviar ticket a soporte</h2>
         <form @submit.prevent="sendTicket">
-            <label for="formEmail">Email de contacto</label>
-            <input type="text" v-model="formEmail" id="formEmail">
-            <label for="formText">Describa su problema</label>
-            <textarea v-model="formText" id="formText"></textarea>
-            <button @submit="sendTicket">Enviar</button>
+            <fieldset class="form__row">
+                <div class="form__column__small">
+                    <label for="formEmail" class="form__label">Email de contacto</label>
+                </div>
+                <div class="form__column__big">
+                    <input type="text" v-model="formEmail" id="formEmail" class="form__input">
+                </div>
+            </fieldset>
+            <fieldset class="form__row">
+                <div class="form__column__small">
+                    <label for="formText" class="form__label">Describa su problema</label>
+                </div>
+                <div class="form__column__big">
+                    <textarea v-model="formText" id="formText" class="form__input"></textarea>
+                </div>
+            </fieldset>
+            <fieldset class="form__row">
+                <button @submit="sendTicket" class="form__button">Enviar</button>
+            </fieldset>
         </form>
     </section>
 </template>

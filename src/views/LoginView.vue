@@ -1,5 +1,6 @@
 <template>
     <section class="form__container">
+        <h2>Iniciar sesión</h2>
         <form @submit.prevent="login" class="form">
             <fieldset class="form__row">
                 <div class="form__column__small">

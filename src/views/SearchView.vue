@@ -1,5 +1,6 @@
 <template>
     <section class="form__container">
+        <h2>Búsqueda avanzada</h2>
         <form @submit.prevent="searchEvents">
             <fieldset class="form__row">
                 <div class="form__column__small">
@@ -45,7 +46,7 @@
                 </div>
             </fieldset>
             <fieldset class="form__row">
-                <router-link class="form__button":to="{name: 'results', params: {query: this.eventQuery, type: this.eventType, country: this.eventCountry, date: this.eventDate}}">Buscar</router-link>
+                <router-link class="form__button" :to="{name: 'results', params: {query: this.eventQuery, type: this.eventType, country: this.eventCountry, date: this.eventDate}}">Buscar</router-link>
             </fieldset>
         </form>
     </section>

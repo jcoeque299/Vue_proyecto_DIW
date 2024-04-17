@@ -1,5 +1,6 @@
 <template>
-    <section v-if="events" class="event__card__container">
+    <section v-if="events" :key="events" class="event__card__container">
+        <h2>Resultados</h2>
         <article class="event__card" v-for="event in events" :key="event.id">
             <router-link  :to="{name: 'event', params: {id: event.id}}">
                 <img v-if="event.images" :src="event.images[0].url">
@@ -27,7 +28,7 @@ export default {
         query: {type: String, required: false},
         type: {type: String, required: false},
         country: {type: String, required: false},
-        date: {type: Date, required: false},
+        date: {type: String, required: false},
     },
     data() {
         return {
@@ -35,19 +36,29 @@ export default {
             error: false,
         }
     },
-    async created() {
-        try {
-            const data = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?keyword=${this.$props.query}&countryCode=${this.$props.country}&classificationName=${this.$props.type}&startDateTime=${this.$props.date}T00:00:00Z&apikey=S1sDAS05dZI5JmtvdarQaZN5tFxkOUpr`)
-            const results = await data.json()
-            console.log(results)
-            if (results._embedded) {
-                this.events = results._embedded.events
-                return
-            }
-            this.events = false
+    watch: {
+        $route (to, from) {
+            this.searchEvents()
         }
-        catch {
-            this.error = true
+    },
+    async created() {
+        await this.searchEvents()
+    },
+    methods: {
+        async searchEvents() {
+            try {
+                const data = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?keyword=${this.$props.query}&countryCode=${this.$props.country}&classificationName=${this.$props.type}&startDateTime=${this.$props.date}T00:00:00Z&apikey=S1sDAS05dZI5JmtvdarQaZN5tFxkOUpr`)
+                const results = await data.json()
+                if (results._embedded) {
+                    this.events = results._embedded.events
+                    console.log(this.events)
+                    return
+                }
+                this.events = false
+            }
+            catch {
+                this.error = true
+            }
         }
     }
 }

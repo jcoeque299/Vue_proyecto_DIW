@@ -87,6 +87,33 @@ section h2 {
     right: 20px;
 }
 
+.menu__search {
+    padding-left: 30px;
+}
+
+.menu__search__input {
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    font-size: 17px;
+}
+
+.menu__search__button {
+    padding: 5px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.menu__search__button:hover {
+    background-color: #b8b8b8;
+}
+
 #check {
     display: none;
 }
@@ -201,6 +228,12 @@ section h2 {
 }
 
 /*Responsive*/
+
+@media(max-width: 1060px) {
+    .menu__search {
+        display: none;
+    }
+}
 
 @media(max-width: 610px) {
     .menu {

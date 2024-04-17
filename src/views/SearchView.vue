@@ -1,7 +1,4 @@
 <template>
-
-    <!--SearchForm.vue-->
-
     <section class="form__container">
         <form @submit.prevent="searchEvents">
             <fieldset class="form__row">
@@ -48,31 +45,10 @@
                 </div>
             </fieldset>
             <fieldset class="form__row">
-                <button type="button" v-on:click="searchEvents" class="form__button">Buscar</button>
+                <router-link class="form__button":to="{name: 'results', params: {query: this.eventQuery, type: this.eventType, country: this.eventCountry, date: this.eventDate}}">Buscar</router-link>
             </fieldset>
         </form>
     </section>
-
-    <!--EventResults.vue-->
-
-    <section v-if="events" class="event__card__container">
-        <article class="event__card" v-for="event in events" :key="event.id">
-            <router-link  :to="{name: 'event', params: {id: event.id}}">
-                <img v-if="event.images" :src="event.images[0].url">
-                <div class="event__card__content">
-                    <h3>
-                        {{ event.name }}
-                    </h3>
-                    <p v-if="!event.dates.start.dateTBD && !event.dates.start.dateTBA">{{ event.dates.start.localDate }}</p>
-                    <p v-if=" event._embedded && event._embedded.venues">{{ event._embedded.venues[0].country.name }}, {{ event._embedded.venues[0].city.name }}</p>
-                </div>
-            </router-link> 
-        </article>
-    </section>
-    <section v-else-if="events === false">
-        <h2>No hay resultados</h2>
-    </section>
-    
 </template>
 
 <script>
@@ -80,7 +56,6 @@
     export default {
         data() {
             return {
-                events: null,
                 eventType: "",
                 eventQuery: "",
                 eventCountry: "",
@@ -88,16 +63,5 @@
                 countryData: countryData
             }
         },
-        methods: {
-            async searchEvents() {
-                const data = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?keyword=${this.eventQuery}&countryCode=${this.eventCountry}&classificationName=${this.eventType}&startDateTime=${this.eventDate}T00:00:00Z&apikey=S1sDAS05dZI5JmtvdarQaZN5tFxkOUpr`)
-                const results = await data.json()
-                if (results._embedded) {
-                    this.events = results._embedded.events
-                    return
-                }
-                this.events = false
-            },
-        }
     }
 </script>

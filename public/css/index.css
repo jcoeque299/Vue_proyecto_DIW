@@ -193,6 +193,7 @@ section h2 {
     margin-top: 20px;
     cursor: pointer;
     float: right;
+    text-decoration: none;
 }
 
 .form__button:hover {

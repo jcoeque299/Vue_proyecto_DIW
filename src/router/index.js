@@ -17,6 +17,12 @@ const router = createRouter({
             component: () => import("../views/SearchView.vue")
         },
         {
+            path: "/results&query=:query?&type=:type?&country=:country?&date=:date?",
+            name: "results",
+            props: route => ({...route.params, query: route.params.query, type: route.params.type, country: route.params.country, date: route.params.date}),
+            component: () => import("../views/ResultsView.vue")
+        },
+        {
             path: "/event/:id",
             name: "event",
             props: route => ({...route.params, id: route.params.id}),

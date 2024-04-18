@@ -126,10 +126,15 @@ section h2 {
 
 /*Cards*/
 
-.event__card__container {
+.event__card__container, .home__card__container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+.home__card__container .event__card img {
+    width: 100%;
+    height: 75%;
 }
 
 .event__card {
@@ -167,7 +172,6 @@ section h2 {
     border-radius: 4px;
     margin-top: 20px;
     cursor: pointer;
-    float: right;
     width: 100%;
 }
 
@@ -188,6 +192,7 @@ section h2 {
     height: 450px;
     display: block;
     margin: auto;
+    border-radius: 4px;
 }
 
 .event__body {
@@ -210,6 +215,10 @@ section h2 {
 
 .event__body p, .event__body a, .event__body button {
     margin: 20px 20px 20px 0;
+}
+
+.event__body button:hover, .event__body a:hover, .event__commentbox__button:hover {
+    background-color: #383838;
 }
 
 /*Event comments*/
@@ -326,7 +335,7 @@ section h2 {
 
 /*Responsive*/
 
-@media(max-width: 1060px) {
+@media(max-width: 1200px) {
     .menu__search {
         display: none;
     }

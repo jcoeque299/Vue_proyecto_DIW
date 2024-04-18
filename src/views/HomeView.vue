@@ -1,4 +1,47 @@
 <template>
+    <section class="home__card__container">
+        <h2>Buscar por categorías</h2>
+        <article class="event__card">
+            <router-link :to="{name: 'results', params: {query: '', type: 'Music', country: '', date: `${new Date().getFullYear()}-01-01`}}">
+                <img :src='require("/public/images/music.jpg")'>
+                <div class="event__card__content">
+                    <h3>Música</h3>
+                </div>
+            </router-link>
+        </article>
+        <article class="event__card">
+            <router-link :to="{name: 'results', params: {query: '', type: 'Sports', country: '', date: `${new Date().getFullYear()}-01-01`}}">
+                <img :src='require("/public/images/sports.jpg")'>
+                <div class="event__card__content">
+                    <h3>Deportes</h3>
+                </div>
+            </router-link>
+        </article>
+        <article class="event__card">
+            <router-link :to="{name: 'results', params: {query: '', type: 'Film', country: '', date: `${new Date().getFullYear()}-01-01`}}">
+                <img :src='require("/public/images/cine.jpg")'>
+                <div class="event__card__content">
+                    <h3>Cine</h3>
+                </div>
+            </router-link>
+        </article>
+        <article class="event__card">
+            <router-link :to="{name: 'results', params: {query: '', type: 'Arts & Theatre', country: '', date: `${new Date().getFullYear()}-01-01`}}">
+                <img :src='require("/public/images/teatro.jpg")'>
+                <div class="event__card__content">
+                    <h3>Artes y teatro</h3>
+                </div>
+            </router-link>
+        </article>
+        <article class="event__card">
+            <router-link :to="{name: 'results', params: {query: '', type: 'Merchandising', country: '', date: `${new Date().getFullYear()}-01-01`}}">
+                <img :src='require("/public/images/merchandising.jpg")'>
+                <div class="event__card__content">
+                    <h3>Merchandising</h3>
+                </div>
+            </router-link>
+        </article>
+    </section>
     <section v-if = "eventRecomendations && user" class="event__card__container">
         <h2>Eventos en {{ this.user.locationName }}</h2>
         <article class="event__card" v-for="event in eventRecomendations" :key="event.id">
@@ -13,7 +56,6 @@
                 </div>
             </router-link> 
         </article>
-        
     </section>
 </template>
 

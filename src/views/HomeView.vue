@@ -2,7 +2,7 @@
     <section class="home__card__container">
         <h2>Buscar por categorías</h2>
         <article class="event__card">
-            <router-link :to="{name: 'results', params: {query: '', type: 'Music', country: '', date: `${new Date().getFullYear()}-01-01`}}">
+            <router-link :to="{name: 'results', params: {query: '', type: 'Music', country: this.location, date: `${new Date().getFullYear()}-01-01`}}">
                 <img :src='require("/public/images/music.jpg")'>
                 <div class="event__card__content">
                     <h3>Música</h3>
@@ -10,7 +10,7 @@
             </router-link>
         </article>
         <article class="event__card">
-            <router-link :to="{name: 'results', params: {query: '', type: 'Sports', country: '', date: `${new Date().getFullYear()}-01-01`}}">
+            <router-link :to="{name: 'results', params: {query: '', type: 'Sports', country: this.location, date: `${new Date().getFullYear()}-01-01`}}">
                 <img :src='require("/public/images/sports.jpg")'>
                 <div class="event__card__content">
                     <h3>Deportes</h3>
@@ -18,7 +18,7 @@
             </router-link>
         </article>
         <article class="event__card">
-            <router-link :to="{name: 'results', params: {query: '', type: 'Film', country: '', date: `${new Date().getFullYear()}-01-01`}}">
+            <router-link :to="{name: 'results', params: {query: '', type: 'Film', country: this.location, date: `${new Date().getFullYear()}-01-01`}}">
                 <img :src='require("/public/images/cine.jpg")'>
                 <div class="event__card__content">
                     <h3>Cine</h3>
@@ -26,7 +26,7 @@
             </router-link>
         </article>
         <article class="event__card">
-            <router-link :to="{name: 'results', params: {query: '', type: 'Arts & Theatre', country: '', date: `${new Date().getFullYear()}-01-01`}}">
+            <router-link :to="{name: 'results', params: {query: '', type: 'Arts & Theatre', country: this.location, date: `${new Date().getFullYear()}-01-01`}}">
                 <img :src='require("/public/images/teatro.jpg")'>
                 <div class="event__card__content">
                     <h3>Artes y teatro</h3>
@@ -34,7 +34,7 @@
             </router-link>
         </article>
         <article class="event__card">
-            <router-link :to="{name: 'results', params: {query: '', type: 'Merchandising', country: '', date: `${new Date().getFullYear()}-01-01`}}">
+            <router-link :to="{name: 'results', params: {query: '', type: 'Merchandising', country: this.location, date: `${new Date().getFullYear()}-01-01`}}">
                 <img :src='require("/public/images/merchandising.jpg")'>
                 <div class="event__card__content">
                     <h3>Merchandising</h3>
@@ -42,8 +42,8 @@
             </router-link>
         </article>
     </section>
-    <section v-if = "eventRecomendations && user" class="event__card__container">
-        <h2>Eventos en {{ this.user.locationName }}</h2>
+    <section v-if = "eventRecomendations && location" :key="eventRecomendations" class="event__card__container">
+        <h2>Eventos en {{ this.locationName }}</h2>
         <article class="event__card" v-for="event in eventRecomendations" :key="event.id">
             <router-link  :to="{name: 'event', params: {id: event.id}}">
                 <img v-if="event.images" :src="event.images[0].url">
@@ -66,15 +66,26 @@
     export default {
         data() {
             return {
-                user: null,
                 countryData: countryData,
-                eventRecomendations: null
+                eventRecomendations: null,
+                locationName: '',
+                location: ''
             }
         },
         async created() {
-            const data = await fetch("http://localhost:8000/api/user", {
-            method: 'get',
-            headers: {
+            if (cookies.get("token")) {
+                this.setEventRecommendations()
+            }
+            cookies.addChangeListener(() => {
+                this.location = null
+                this.locationName = null
+            })
+        },
+        methods: {
+            async setEventRecommendations() {
+                const data = await fetch("http://localhost:8000/api/user", {
+                method: 'get',
+                headers: {
                 'Authorization': 'Bearer ' + cookies.get("token")
             }})
             const response = await data.json()
@@ -82,18 +93,18 @@
                 cookies.remove("token", {path:"/"})
                 this.$router.push("/")
                 return
-            }
-            this.user = response
-            this.user.locationName = countryData.find(country => country.code === this.user.location).name
-            if (this.user) {
-                const data = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=${this.user.location}&apikey=S1sDAS05dZI5JmtvdarQaZN5tFxkOUpr&size=5`)
+                }
+            this.location = response.location
+            this.locationName = countryData.find(country => country.code === this.location).name ?? ''
+            if (this.location) {
+                const data = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=${this.location}&apikey=S1sDAS05dZI5JmtvdarQaZN5tFxkOUpr&size=5`)
                 const results = await data.json()
                 if (results._embedded) {
                     this.eventRecomendations = results._embedded.events
-                    console.log(this.eventRecomendations)
                     return
-                }
+                    }
                 this.eventRecomendations = null
+                }
             }
         }
     }

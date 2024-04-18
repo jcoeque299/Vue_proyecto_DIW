@@ -1,30 +1,43 @@
 <template>
     <section v-if="event">
-        <article>
-            <h1>
-            {{ event.name }}
-            </h1>
-            <img v-if="event.images" :src="event.images[0].url">
-            <img v-if="event.seatmap" :src="event.seatmap.staticUrl">
-            <p v-if="!event.dates.start.dateTBD && !event.dates.start.dateTBA">Fecha del evento: {{ event.dates.start.localDate }}</p>
-            <p v-if=" event._embedded && event._embedded.venues">En: {{ event._embedded.venues[0].country.name }}, {{ event._embedded.venues[0].city.name }}</p>
-            <p v-if="event.info">{{ event.info }}</p>
-            <p v-if="event.pleaseNote">{{ event.pleaseNote }}</p>
-            <p v-if="event.ticketLimit">{{ event.ticketLimit.info }}</p>
-            <button v-if="event.seatmap">Ver mapa del recinto</button>
-            <a v-if="event.url" :href="event.url" target="_blank">Comprar entradas</a>
-            <button @click="saveEvent" v-if="!saved">Guardar evento</button>
-            <button @click="removeEvent" v-if="saved">Borrar evento</button>
-        </article>
-        <article v-if="user" :key = "user">
-        <form @submit.prevent="sendComment">
-            <textarea v-model="commentBox" id="commentBox"></textarea>
-            <button @submit="sendComment">Enviar comentario</button>
-        </form>
-        </article>
-        <article v-if="comments">
-            <p v-for="comment in comments">{{ comment.name }} {{ comment.commentText }}</p>
-        </article>
+        <section class="event__information">
+            <article class="event__header">
+                <h2>
+                {{ event.name }}
+                </h2>
+                <img v-if="event.images" :src="event.images[0].url">
+                <!-- <img v-if="event.seatmap" :src="event.seatmap.staticUrl"> -->
+            </article>
+            <article class="event__body">
+                <p v-if="!event.dates.start.dateTBD && !event.dates.start.dateTBA">Fecha del evento: {{ event.dates.start.localDate }}</p>
+                <p v-if=" event._embedded && event._embedded.venues">En: {{ event._embedded.venues[0].country.name }}, {{ event._embedded.venues[0].city.name }}</p>
+                <p v-if="event.info">{{ event.info }}</p>
+                <p v-if="event.pleaseNote">{{ event.pleaseNote }}</p>
+                <p v-if="event.ticketLimit">{{ event.ticketLimit.info }}</p>
+                <button v-if="event.seatmap">Ver mapa del recinto</button>
+                <a v-if="event.url" :href="event.url" target="_blank">Comprar entradas</a>
+                <button @click="saveEvent" v-if="!saved">Guardar evento</button>
+                <button @click="removeEvent" v-if="saved">Borrar evento</button>
+            </article>
+        </section>
+        <section class="event__commentbox__container" v-if="user" :key = "user">
+            <h3>Escribe tu comentario</h3>
+            <form @submit.prevent="sendComment">
+                <textarea v-model="commentBox" id="commentBox" class="event__commentbox"></textarea>
+                <button @submit="sendComment" class="event__commentbox__button">Enviar comentario</button>
+            </form>
+        </section>
+        <section v-if="comments" class="event__comments">
+            <h3 >Comentarios</h3>
+            <article v-for="comment in comments" class="event__comment">
+                <div class="event__comment__info">
+                    <p>{{ comment.name }}</p>
+                </div>
+                <div class="event__comment__body">
+                    <p>{{ comment.commentText }}</p>
+                </div>
+            </article>
+        </section>
     </section>
 </template>
 

@@ -1,8 +1,11 @@
 <template>
-    <h1>Perfil</h1>
-    <section v-if="user">
+    <section v-if="user" class="user__info">
+        <h2>Perfil</h2> 
+        <h4>Username:</h4>
         <p>{{ user.name }}</p>
+        <h4>Email:</h4>
         <p>{{ user.email }}</p>
+        <h4>Ubicacion:</h4>
         <p>{{ user.location }}</p>
     </section>
 </template>

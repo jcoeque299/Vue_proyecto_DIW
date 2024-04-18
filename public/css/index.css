@@ -9,7 +9,11 @@ body {
     --color2: #181818;
 }
 
-section {
+main {
+    min-height: 600px;
+}
+
+section, footer {
     margin-top: 100px;
 }
 
@@ -99,11 +103,11 @@ section h2 {
 }
 
 .menu__search__button {
-    padding: 5px;
+    padding: 6px;
     margin-top: 8px;
     margin-right: 16px;
     background: #ddd;
-    font-size: 17px;
+    font-size: 16px;
     border: none;
     cursor: pointer;
     text-decoration: none;
@@ -150,6 +154,11 @@ section h2 {
     padding: 16px;
 }
 
+.event__card a {
+    text-decoration: none;
+    color: #181818;
+}
+
 .event__card__button {
     background-color: #181818;
     color: white;
@@ -164,6 +173,78 @@ section h2 {
 
 .event__card__button:hover {
     background-color: #383838;
+}
+
+/*Event information*/
+
+.event__information {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+}
+
+.event__header img {
+    width: 800px;
+    height: 450px;
+    display: block;
+    margin: auto;
+}
+
+.event__body {
+    width: 800px;
+    margin: auto;
+}
+
+.event__body a, .event__body button, .event__commentbox__button {
+    all: initial;
+    font-family: "Open Sans";
+    background-color: #181818;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.event__body p, .event__body a, .event__body button {
+    margin: 20px 20px 20px 0;
+}
+
+/*Event comments*/
+
+.event__comments, .event__commentbox__container {
+    width: 800px;
+    max-width: 100%;
+    background-color: #fff;
+    border: 1px solid transparent;
+    margin: 50px auto;
+}
+
+.event__comment {
+    position: relative;
+    margin: 10px;
+}
+
+.event__comment__info {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.event__comment__info {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    font-size: 14px;
+}
+
+.event__commentbox {
+    width: 100%;
+    height: 100px
 }
 
 /*Forms*/
@@ -225,6 +306,22 @@ section h2 {
 
 .form__button:hover {
     background-color: #383838;
+}
+
+/*User info*/
+
+.user__info {
+    width: 500px;
+    margin: 100px auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+    padding: 30px;
+    background-color: #f2f2f2;
+}
+
+.user__info h4, .user__info p {
+    margin-bottom: 20px;
 }
 
 /*Responsive*/

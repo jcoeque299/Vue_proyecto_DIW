@@ -317,6 +317,24 @@ section h2, #h3__404 {
     background-color: #383838;
 }
 
+.form__button:disabled {
+    background-color: #575757;
+}
+
+.form__error {
+    margin-top: 4px;
+    border-radius: 4px;
+    background-color: rgb(158, 7, 7);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.form__error p {
+    margin-left: 4px;
+}
+
 /*User info*/
 
 .user__info {

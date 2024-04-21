@@ -2,11 +2,11 @@
 
 ## Descripción
 
-La aplicación que voy a desarrollar para este proyecto va a ser una página web para buscar eventos de todo tipo, pudiendo filtrar según una variedad de criterios, como por ejemplo, por tipo de evento (concierto, teatro...), por ubicación, etc...
+La aplicación que he desarrollado para este proyecto es una página web para buscar eventos de todo tipo, pudiendo filtrar según una variedad de criterios, como por ejemplo, por tipo de evento (concierto, teatro...), por ubicación, etc...
 
-### Tecnologías a utilizar
+## Tecnologías a utilizar
 
-#### Frameworks
+### Frameworks
 
 + Vue: Será el framework utilizado para el frontend de la página web
 
@@ -14,13 +14,13 @@ La aplicación que voy a desarrollar para este proyecto va a ser una página web
 
 + MySQL: Todos los datos necesarios están guardados en una base de datos MySQL, usada mediante la API mencionada anteriormente
 
-#### Librerías
+### Librerías
 
 + Vue Use & Universal Cookies: Usadas para poder usar cookies de forma reactiva, de forma que cuando se realicen cambios en las mismas, el contenido de la página cambie
 
 + Vue Router: Necesaria para el enrutamiento de la página
 
-#### APIs
+### APIs
 
 + TicketMaster: Para poder proporcionar información sobre los eventos, será necesario utilizar la API de ticketmaster
 
@@ -40,19 +40,19 @@ La aplicación que voy a desarrollar para este proyecto va a ser una página web
 
 Página de inicio
 
-![Pagina de inicio](https://imgur.com/nOSpRSP)
+![Pagina de inicio](/public/images/home.png)
 
 Página de búsqueda
 
-![Pagina de busqueda](https://imgur.com/SBr0swl)
+![Pagina de busqueda](/public/images/advancedsearch.png)
 
 Pagina de resultados
 
-![Pagina de resultados](https://imgur.com/EURXR5a)
+![Pagina de resultados](/public/images/searchresults.png)
 
 Pagina de detalles de evento
 
-![Pagina de detalles de evento](https://imgur.com/JgAXl3b)
+![Pagina de detalles de evento](/public/images/eventdetails.png)
 
 ## Instrucciones de instalación y configuración
 
@@ -99,15 +99,23 @@ Para el uso de esta aplicación es imprescindible instalar y desplegar su backen
     DB_PASSWORD=my_secret_password
     ```
 
-Si .env.example no existe al instalar el proyecto, copia todo el contenido[del siguiente ejemplo](https://github.com/platformsh-templates/laravel/blob/master/.env.example) en el archivo .env, y posteriormente cambia los parámetros indicados
+Si .env.example no existe al instalar el proyecto, copia todo el contenido [del siguiente ejemplo](https://github.com/platformsh-templates/laravel/blob/master/.env.example) en el archivo .env, y posteriormente cambia los parámetros indicados
 
-6. El último paso para poder utilizar el backend es desplegar la base de datos, para eso, ejecutar el siguiente comando desde el directorio del proyecto
+6. Para poder utilizar el backend es necesario desplegar la base de datos, para eso, ejecutar el siguiente comando desde el directorio del proyecto
 
     ```docker compose up -d```
 
-7. Es imposible crear un usuario de administrador desde la página, por lo que si quieres crear uno para probar las funciones de administrador, ejecuta el siguiente comando
+7. A continuación, hay que crear todas las tablas en la base de datos, mediante el siguiente comando
+
+    ```php artisan migrate```
+
+8. Es imposible crear un usuario de administrador desde la página, por lo que si quieres crear uno para probar las funciones de administrador, ejecuta el siguiente comando
 
     ```php artisan db:seed --class=UsersTableSeeder```
+
+9. Por último, desplegar el backend con el siguiente comando
+
+    ```php artisan serve```
 
 ## Uso de la aplicación
 
@@ -126,6 +134,6 @@ La página consta de 10 páginas distintas, además de la página de error 404
 
 ## Enlace de despliegue
 
+Será necesario tener el backend desplegado en localhost para el uso de la página, incluso desde el enlace de despliegue
 
-
-## Reflexiones y aprendizaje
+[https://eventwizard-vue.netlify.app/](https://eventwizard-vue.netlify.app/)

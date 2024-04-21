@@ -1,11 +1,16 @@
 <template>
-    <section >
-        <article v-if="tickets" v-for="ticket in tickets">
-            <p>{{ ticket.contactEmail }}</p>
-            <p>{{ ticket.text }}</p>
+    <section class="event__comments">
+        <h2>Tickets de soporte</h2>
+        <article v-if="tickets" v-for="ticket in tickets" class="event__comment">
+            <div class="event__comment__info">
+                <p>{{ ticket.contactEmail }}</p>
+            </div>
+            <div class="event__comment__body">
+                <p>{{ ticket.text }}</p>
+            </div>
         </article>
         <article v-else-if="tickets === false">
-            <p>Acceso no autorizado</p>
+            <h3>Acceso no autorizado</h3>
         </article>
     </section>
     

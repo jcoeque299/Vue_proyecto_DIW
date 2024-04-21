@@ -16,8 +16,8 @@
                 <p v-if="event.ticketLimit">{{ event.ticketLimit.info }}</p>
                 <button v-if="event.seatmap">Ver mapa del recinto</button>
                 <a v-if="event.url" :href="event.url" target="_blank">Comprar entradas</a>
-                <button @click="saveEvent" v-if="!saved">Guardar evento</button>
-                <button @click="removeEvent" v-if="saved">Borrar evento</button>
+                <button @click="saveEvent" v-if="!saved && user">Guardar evento</button>
+                <button @click="removeEvent" v-if="saved && user">Borrar evento</button>
             </article>
         </section>
         <section class="event__commentbox__container" v-if="user" :key = "user">

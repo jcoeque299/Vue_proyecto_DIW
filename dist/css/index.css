@@ -15,7 +15,7 @@ section, footer {
     margin-top: 100px;
 }
 
-section h2, #h3__404 {
+section h1, section h2, #h3__404 {
     flex-basis: 100%;
     text-align: center;
     margin-bottom: 30px;
@@ -240,6 +240,10 @@ footer a {
     color: black;
 }
 
+.menu__search__label {
+    display: none;
+}
+
 .menu__search__button:hover {
     background-color: #b8b8b8;
 }
@@ -270,6 +274,11 @@ footer a {
     box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
     margin: 20px;
     transition: all 0.3s;
+}
+
+.event__card h2 {
+    text-align: left;
+    font-family: 'Open Sans';
 }
 
 .event__card:hover {
@@ -319,6 +328,10 @@ footer a {
     display: block;
     margin: auto;
     border-radius: 4px;
+}
+
+.event__header h1 {
+    font-size: 28px;
 }
 
 .event__body {
@@ -503,7 +516,7 @@ footer a {
       height: 45px;
     }
   
-    .footer__container h2 {
+    .footer__container h2, .footer__container h1 {
       font-size: 4rem;
       padding-bottom: 5rem;
     }
@@ -568,7 +581,7 @@ footer a {
       padding: 2.5rem 0;
     }
   
-    .footer__container h2 {
+    .footer__container h2, .footer__container h1 {
       font-size: 3rem;
       padding-bottom: 4rem;
     }

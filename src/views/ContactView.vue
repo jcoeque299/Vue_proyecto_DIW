@@ -1,6 +1,6 @@
 <template>
     <section class="form__container">
-        <h2>Enviar ticket a soporte</h2>
+        <h1>Enviar ticket a soporte</h1>
         <form @submit.prevent="sendTicket">
             <fieldset class="form__row">
                 <div class="form__column__small">

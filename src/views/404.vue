@@ -1,14 +1,14 @@
 <template>
     <section class="event__card__container">
-        <h2>Oops... Esta página no existe...</h2>
-        <h3 id="h3__404">Prueba con estos eventos</h3>
+        <h1>Oops... Esta página no existe...</h1>
+        <h2 id="h3__404">Prueba con estos eventos</h2>
         <article class="event__card" v-for="event in eventRecomendations" :key="event.id">
             <router-link  :to="{name: 'event', params: {id: event.id}}">
-                <img v-if="event.images" :src="event.images[0].url">
+                <img v-if="event.images" :src="event.images[0].url" :alt="event.name">
                 <div class="event__card__content">
-                    <h3>
+                    <h2>
                         {{ event.name }}
-                    </h3>
+                    </h2>
                     <p v-if="!event.dates.start.dateTBD && !event.dates.start.dateTBA">{{ event.dates.start.localDate }}</p>
                     <p v-if=" event._embedded && event._embedded.venues">{{ event._embedded.venues[0].city.name }}</p>  
                 </div>

@@ -2,10 +2,10 @@
     <section v-if="event">
         <section class="event__information">
             <article class="event__header">
-                <h2>
+                <h1>
                 {{ event.name }}
-                </h2>
-                <img v-if="event.images" :src="event.images[0].url">
+                </h1>
+                <img v-if="event.images" :src="event.images[0].url" :alt="event.name">
                 <!-- <img v-if="event.seatmap" :src="event.seatmap.staticUrl"> -->
             </article>
             <article class="event__body">
@@ -21,7 +21,7 @@
             </article>
         </section>
         <section class="event__commentbox__container" v-if="user" :key = "user">
-            <h3>Escribe tu comentario</h3>
+            <h2>Escribe tu comentario</h2>
             <form @submit.prevent="sendComment">
                 <textarea v-model="commentBox" id="commentBox" class="event__commentbox"></textarea>
                 <button @submit="sendComment" class="event__commentbox__button">Enviar comentario</button>

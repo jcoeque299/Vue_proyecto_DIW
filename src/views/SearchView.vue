@@ -1,6 +1,6 @@
 <template>
     <section class="form__container">
-        <h2>Búsqueda avanzada</h2>
+        <h1>Búsqueda avanzada</h1>
         <form @submit.prevent="searchEvents">
             <fieldset class="form__row">
                 <div class="form__column__small">

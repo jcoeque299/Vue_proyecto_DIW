@@ -1,13 +1,13 @@
 <template>
     <section v-if="events" :key="events" class="event__card__container">
-        <h2>Resultados</h2>
+        <h1>Resultados</h1>
         <article class="event__card" v-for="event in events" :key="event.id">
             <router-link  :to="{name: 'event', params: {id: event.id}}">
-                <img v-if="event.images" :src="event.images[0].url">
+                <img v-if="event.images" :src="event.images[0].url" :alt="event.name">
                 <div class="event__card__content">
-                    <h3>
+                    <h2>
                         {{ event.name }}
-                    </h3>
+                    </h2>
                     <p v-if="!event.dates.start.dateTBD && !event.dates.start.dateTBA">{{ event.dates.start.localDate }}</p>
                     <p v-if=" event._embedded && event._embedded.venues">{{ event._embedded.venues[0].country.name }}, {{ event._embedded.venues[0].city.name }}</p>
                 </div>

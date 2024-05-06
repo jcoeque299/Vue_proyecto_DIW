@@ -1,6 +1,6 @@
 <template>
     <section class="event__comments">
-        <h2>Tickets de soporte</h2>
+        <h1>Tickets de soporte</h1>
         <article v-if="tickets" v-for="ticket in tickets" class="event__comment">
             <div class="event__comment__info">
                 <p>{{ ticket.contactEmail }}</p>

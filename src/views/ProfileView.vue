@@ -1,6 +1,6 @@
 <template>
     <section v-if="user" class="user__info">
-        <h2>Perfil</h2> 
+        <h1>Perfil</h1> 
         <h4>Username:</h4>
         <p>{{ user.name }}</p>
         <h4>Email:</h4>

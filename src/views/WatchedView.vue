@@ -3,7 +3,7 @@
         <h2>Eventos guardados</h2>
         <article v-for="savedEvent in saved" :key="savedEvent.eventId" class="event__card">
             <router-link :to="{name: 'event', params: {id: savedEvent.eventId}}">
-                <img v-if="savedEvent.eventImageSource" :src="savedEvent.eventImageSource">
+                <img v-if="savedEvent.eventImageSource" :src="savedEvent.eventImageSource" :alt="savedEvent.eventName">
                 <div class="event__card__content">
                     <h3>
                         {{ savedEvent.eventName }}

@@ -5,9 +5,10 @@
 <template>
     <ul class="navbar">
         <span class="menu">
-            <li class="logo"><img src=""></li>
+            <li class="logo"><img src="" alt="pageLogo"></li>
             <div class="menu__search">
-                <input type="text" class="menu__search__input" placeholder="¿Qué quieres ver?" v-model="eventQuery">
+                <label for="menuBusqueda" class="menu__search__label">Búsqueda</label>
+                <input id="menuBusqueda" type="text" class="menu__search__input" placeholder="¿Qué quieres ver?" v-model="eventQuery">
                 <router-link class="menu__search__button" :to="{name: 'results', params: {query: eventQuery, type: '', country: '', date: `${new Date().getFullYear()}-01-01`,}}">Buscar</router-link>
             </div>
         </span>

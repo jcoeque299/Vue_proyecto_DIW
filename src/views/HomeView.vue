@@ -1,43 +1,43 @@
 <template>
     <section class="home__card__container">
-        <h2>Buscar por categorías</h2>
+        <h1>Buscar por categorías</h1>
         <article class="event__card">
             <router-link :to="{name: 'results', params: {query: '', type: 'Music', country: this.location, date: `${new Date().getFullYear()}-01-01`}}">
-                <img :src='require("/public/images/music.jpg")'>
+                <img :src='require("/public/images/music.jpg")' alt="">
                 <div class="event__card__content">
-                    <h3>Música</h3>
+                    <h2>Música</h2>
                 </div>
             </router-link>
         </article>
         <article class="event__card">
             <router-link :to="{name: 'results', params: {query: '', type: 'Sports', country: this.location, date: `${new Date().getFullYear()}-01-01`}}">
-                <img :src='require("/public/images/sports.jpg")'>
+                <img :src='require("/public/images/sports.jpg")' alt="">
                 <div class="event__card__content">
-                    <h3>Deportes</h3>
+                    <h2>Deportes</h2>
                 </div>
             </router-link>
         </article>
         <article class="event__card">
             <router-link :to="{name: 'results', params: {query: '', type: 'Film', country: this.location, date: `${new Date().getFullYear()}-01-01`}}">
-                <img :src='require("/public/images/cine.jpg")'>
+                <img :src='require("/public/images/cine.jpg")' alt="">
                 <div class="event__card__content">
-                    <h3>Cine</h3>
+                    <h2>Cine</h2>
                 </div>
             </router-link>
         </article>
         <article class="event__card">
             <router-link :to="{name: 'results', params: {query: '', type: 'Arts & Theatre', country: this.location, date: `${new Date().getFullYear()}-01-01`}}">
-                <img :src='require("/public/images/teatro.jpg")'>
+                <img :src='require("/public/images/teatro.jpg")' alt="">
                 <div class="event__card__content">
-                    <h3>Artes y teatro</h3>
+                    <h2>Artes y teatro</h2>
                 </div>
             </router-link>
         </article>
         <article class="event__card">
             <router-link :to="{name: 'results', params: {query: '', type: 'Merchandising', country: this.location, date: `${new Date().getFullYear()}-01-01`}}">
-                <img :src='require("/public/images/merchandising.jpg")'>
+                <img :src='require("/public/images/merchandising.jpg")' alt="">
                 <div class="event__card__content">
-                    <h3>Merchandising</h3>
+                    <h2>Merchandising</h2>
                 </div>
             </router-link>
         </article>
@@ -46,11 +46,11 @@
         <h2>Eventos en {{ this.locationName }}</h2>
         <article class="event__card" v-for="event in eventRecomendations" :key="event.id">
             <router-link  :to="{name: 'event', params: {id: event.id}}">
-                <img v-if="event.images" :src="event.images[0].url">
+                <img v-if="event.images" :src="event.images[0].url" :alt="event.name">
                 <div class="event__card__content">
-                    <h3>
+                    <h2>
                         {{ event.name }}
-                    </h3>
+                    </h2>
                     <p v-if="!event.dates.start.dateTBD && !event.dates.start.dateTBA">{{ event.dates.start.localDate }}</p>
                     <p v-if=" event._embedded && event._embedded.venues">{{ event._embedded.venues[0].city.name }}</p>  
                 </div>
